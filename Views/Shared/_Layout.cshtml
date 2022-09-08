@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
-		<title>Dungeon Force guildsida</title>
+		<title>@ViewBag.Titel</title>
 		<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="~/css/site.css" rel="stylesheet" />
 	</head>
@@ -21,18 +21,24 @@
 					</ul>
 				</div>
 			</nav>
+			<p>(header)</p>
 		</header>
 		<section>
+			<p>(section, före titel)</p>
 			<h1>@ViewBag.Title</h1>
+			<p>(efter titel)</p>
 			@RenderBody()
 		</section>
 
 		<p>Detta är Dungeon force guildsida</p>
 		<footer>
-		<p class="text-center">Copyright 2022</p>
+		<p class="text-center">Copyright 2022 (Footer)</p>
 		</footer>
 		<script src="~/lib/jquery/dist/jquery.min.js"></script>
+		<script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+		<script src="~/lib/jquery/dist/jquery.slim.js"></script>
+		<script src="~/lib/jquery/dist/jquery.js"></script>
 		<script src="~/lib/index.js"></script>
-	@RenderSection("Scripts", false)
+		@RenderSection("Scripts", false)
 	</body>
 </html>
