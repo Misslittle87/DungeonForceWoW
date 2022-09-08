@@ -37,6 +37,7 @@ namespace DungeonForceWoW.Controllers
             {
                 mailServices.SendMessage("sofia@hansson.se", model.Subject, $"From: {model.Name} - {model.Email}, Message: {model.Message}");
                 ViewBag.UserMessage = "Message sent";
+                ModelState.Clear();
             }
             else
             {
