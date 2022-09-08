@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DungeonForceContextDb": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DungeonForceDb;Integrated Security=True;Connect Timeout=30;MultipleActiveResultSets=true"
+  }
+}

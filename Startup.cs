@@ -1,4 +1,5 @@
-﻿using DungeonForceWoW.Services;
+﻿using DungeonForceWoW.Data;
+using DungeonForceWoW.Services;
 
 namespace DungeonForceWoW
 {
@@ -6,6 +7,7 @@ namespace DungeonForceWoW
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DungeonForceContext>();
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
             services.AddRazorPages();

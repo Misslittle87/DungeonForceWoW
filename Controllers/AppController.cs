@@ -1,4 +1,5 @@
-﻿using DungeonForceWoW.Services;
+﻿using DungeonForceWoW.Data;
+using DungeonForceWoW.Services;
 using DungeonForceWoW.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,12 @@ namespace DungeonForceWoW.Controllers
     public class AppController : Controller
     {
         private readonly IMailServices mailServices;
+        private readonly DungeonForceContext context;
 
-        public AppController(IMailServices mailServices)
+        public AppController(IMailServices mailServices, DungeonForceContext context)
         {
             this.mailServices = mailServices;
+            this.context = context;
         }
         public IActionResult Index()
         {
@@ -51,7 +54,10 @@ namespace DungeonForceWoW.Controllers
         public IActionResult Shop()
         {
             ViewBag.Title = "Shop of Dungeon Force";
-            return View();
+            var result = from p in context.Products
+                         orderby p.Category
+                         select p;
+            return View(result.ToList());
         }
         public IActionResult Login()
         {
