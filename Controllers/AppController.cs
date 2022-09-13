@@ -55,12 +55,17 @@ namespace DungeonForceWoW.Controllers
         {
             ViewBag.Title = "Shop of Dungeon Force";
             var result = from p in context.Products
-                         orderby p.Category
+                         orderby p.Title
                          select p;
             return View(result.ToList());
         }
         public IActionResult Login()
         {
+            return View();
+        }
+        public IActionResult Gallery()
+        {
+            ViewBag.Titel = "Gallery of Dungeon Force";
             return View();
         }
     }
