@@ -1,5 +1,5 @@
 ﻿using DungeonForceWoW.Data.Entities;
-
+// repository istället för context
 namespace DungeonForceWoW.Data
 {
     public class ExempelRepository : IExempelRepository

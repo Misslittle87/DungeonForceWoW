@@ -12,6 +12,8 @@ namespace DungeonForceWoW
                     .AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddTransient<IMailServices, NullMailServices>();
+            services.AddTransient<ExempelSeeder>();
+            services.AddScoped<IExempelRepository, ExempelRepository>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

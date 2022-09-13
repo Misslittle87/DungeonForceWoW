@@ -1,6 +1,6 @@
 ﻿using DungeonForceWoW.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-
+// repository istället för context
 namespace DungeonForceWoW.Data
 {
     public class DungeonForceContext : DbContext

@@ -8,12 +8,17 @@ namespace DungeonForceWoW.Controllers
     public class AppController : Controller
     {
         private readonly IMailServices mailServices;
-        private readonly DungeonForceContext context;
+        private readonly IExempelRepository repository;
 
-        public AppController(IMailServices mailServices, DungeonForceContext context)
+
+        //private readonly DungeonForceContext context; // lägg till DungeonForceContext context i construktorn
+
+        public AppController(IMailServices mailServices, IExempelRepository repository) // interfacen i konstruktorn
         {
             this.mailServices = mailServices;
-            this.context = context;
+            this.repository = repository;
+
+            //this.context = context;
         }
         public IActionResult Index()
         {
@@ -54,10 +59,15 @@ namespace DungeonForceWoW.Controllers
         public IActionResult Shop()
         {
             ViewBag.Title = "Shop of Dungeon Force";
-            var result = from p in context.Products
-                         orderby p.Title
-                         select p;
-            return View(result.ToList());
+            // Används när man använder sig av context
+            //var result = from p in context.Products
+            //             orderby p.Title
+            //             select p;
+            //return View(result.ToList());
+
+            // används vid repository
+            var result = repository.GetAllProducts();
+            return View(result);
         }
         public IActionResult Login()
         {
