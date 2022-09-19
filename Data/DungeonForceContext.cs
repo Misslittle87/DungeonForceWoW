@@ -1,9 +1,10 @@
 ﻿using DungeonForceWoW.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 // repository istället för context
 namespace DungeonForceWoW.Data
 {
-    public class DungeonForceContext : DbContext
+    public class DungeonForceContext : IdentityDbContext<StoreUser>
     {
         private readonly IConfiguration config;
 

@@ -1,5 +1,7 @@
 ﻿using DungeonForceWoW.Data;
+using DungeonForceWoW.Data.Entities;
 using DungeonForceWoW.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace DungeonForceWoW
 {
@@ -7,6 +9,11 @@ namespace DungeonForceWoW
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+            {
+                cfg.User.RequireUniqueEmail = true;
+            })
+                    .AddEntityFrameworkStores<DungeonForceContext>();
             services.AddDbContext<DungeonForceContext>();
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
@@ -28,6 +35,8 @@ namespace DungeonForceWoW
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(cfg =>
             {

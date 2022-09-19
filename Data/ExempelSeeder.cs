@@ -1,4 +1,5 @@
 ﻿using DungeonForceWoW.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Text.Json;
 
@@ -8,15 +9,35 @@ namespace DungeonForceWoW.Data
     {
         private readonly DungeonForceContext context;
         private readonly IWebHostEnvironment hosting;
+        private readonly UserManager<StoreUser> userManager;
 
-        public ExempelSeeder(DungeonForceContext context, IWebHostEnvironment hosting)
+        public ExempelSeeder(DungeonForceContext context, IWebHostEnvironment hosting, UserManager<StoreUser> userManager)
         {
             this.context = context;
             this.hosting = hosting;
+            this.userManager = userManager;
         }
-        public void Seed()
+        public async Task SeedAsync()
         {
             context.Database.EnsureCreated();
+            StoreUser user = await userManager.FindByEmailAsync("sofia_hansson_87@hotmail.com");
+
+            if (user == null)
+            {
+                user = new StoreUser()
+                {
+                    FirstName = "Sofia",
+                    LastName = "Hansson",
+                    Email = "sofia_hansson_87@hotmail.com",
+                    UserName = "sofia_hansson_87@hotmail.com"
+                };
+
+                var result = await userManager.CreateAsync(user, "P@ssw0rd!");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create new user in Seeder");
+                }
+            }
             if (!context.Products.Any())
             {
                 var filePath = Path.Combine(hosting.ContentRootPath, "Data/art.json"); // beroende på var filen jag vill seeda ligger

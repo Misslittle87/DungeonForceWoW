@@ -1,6 +1,7 @@
 ﻿using DungeonForceWoW.Data;
 using DungeonForceWoW.Services;
 using DungeonForceWoW.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DungeonForceWoW.Controllers
@@ -55,6 +56,7 @@ namespace DungeonForceWoW.Controllers
             //throw new InvalidOperationException();
             return View();
         }
+        [Authorize]
         [HttpGet("shop")]
         public IActionResult Shop()
         {

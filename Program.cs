@@ -21,20 +21,17 @@ namespace DungeonForceWoW
                 RunSeeding(host);
                 return;
             }
-
             host.Run();
         }
-
         private static void RunSeeding(IHost host)
         {
             var scopeFactory = host.Services.GetService<IServiceScopeFactory>();
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<ExempelSeeder>();
-                seeder.Seed();
+                seeder.SeedAsync();
             }
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration(AddConfiguration)
@@ -42,7 +39,6 @@ namespace DungeonForceWoW
             {
             webBuilder.UseStartup<Startup>();
             });
-
         private static void AddConfiguration(HostBuilderContext hbContext, IConfigurationBuilder icBuilder)
         {
             icBuilder.Sources.Clear();
