@@ -27,16 +27,16 @@ namespace DungeonForceWoW.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loggin)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var restult = await signInManager.PasswordSignInAsync(loggin.Username, loggin.Password, loggin.RemeberMe, false);
+                var restult = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RemeberMe, false);
                 if (restult.Succeeded)
                 {
                     if (Request.Query.Keys.Contains("ReturnUrl"))
                     {
-                        return Redirect(Request.Query["ReturnUrl"].First());
+                        Redirect(Request.Query["ReturnUrl"].First());
                     }
                     else
                     {
@@ -51,6 +51,22 @@ namespace DungeonForceWoW.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "App");
+        }
+        [HttpGet]
+        public async Task<IActionResult> CreateToken([FromBody] LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await userManager.FindByNameAsync(model.Username);
+                if(user != null)
+                {
+                    var result = signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                    if (result.IsCompletedSuccessfully)
+                    {
+
+                    }
+                }
+            }
         }
     }
 }

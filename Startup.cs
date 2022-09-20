@@ -14,9 +14,9 @@ namespace DungeonForceWoW
                 cfg.User.RequireUniqueEmail = true;
             })
                     .AddEntityFrameworkStores<DungeonForceContext>();
+            services.AddAuthentication().AddCookie().AddJwtBearer();
             services.AddDbContext<DungeonForceContext>();
-            services.AddControllersWithViews()
-                    .AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddTransient<IMailServices, NullMailServices>();
             services.AddTransient<ExempelSeeder>();

@@ -32,7 +32,7 @@ namespace DungeonForceWoW.Data
                     UserName = "sofia_hansson_87@hotmail.com"
                 };
 
-                var result = await userManager.CreateAsync(user, "P@ssw0rd!");
+                var result = await userManager.CreateAsync(user, "abc123");
                 if (result != IdentityResult.Success)
                 {
                     throw new InvalidOperationException("Could not create new user in Seeder");
