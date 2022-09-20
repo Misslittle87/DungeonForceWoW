@@ -29,23 +29,32 @@ namespace DungeonForceWoW
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<ExempelSeeder>();
-                seeder.SeedAsync();
+                seeder.SeedAsync().Wait();
             }
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration(AddConfiguration)
+            .ConfigureAppConfiguration(SetupConfiguration)//Addconfiguration
             .ConfigureWebHostDefaults(webBuilder =>
             {
             webBuilder.UseStartup<Startup>();
             });
-        private static void AddConfiguration(HostBuilderContext hbContext, IConfigurationBuilder icBuilder)
-        {
-            icBuilder.Sources.Clear();
+        //private static void AddConfiguration(HostBuilderContext hbContext, IConfigurationBuilder icBuilder)
+        //{
+        //    icBuilder.Sources.Clear();
 
-            icBuilder.SetBasePath(Directory.GetCurrentDirectory())
-                     .AddJsonFile("config.json")
-                     .AddEnvironmentVariables();
+        //    icBuilder.SetBasePath(Directory.GetCurrentDirectory())
+        //             .AddJsonFile("config.json")
+        //             .AddEnvironmentVariables();
+        //}
+        private static void SetupConfiguration(HostBuilderContext ctx, IConfigurationBuilder builder)
+        {
+            // Removing the default configuration options
+            builder.Sources.Clear();
+
+            builder.AddJsonFile("config.json", false, true)
+                   .AddEnvironmentVariables();
+
         }
     }
 }

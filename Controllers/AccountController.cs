@@ -17,6 +17,7 @@ namespace DungeonForceWoW.Controllers
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
+        [HttpGet]
         public IActionResult Login()
         {
             if (this.User.Identity.IsAuthenticated)
@@ -26,7 +27,7 @@ namespace DungeonForceWoW.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> LogIn(LoginViewModel loggin)
+        public async Task<IActionResult> Login(LoginViewModel loggin)
         {
             if (ModelState.IsValid)
             {
