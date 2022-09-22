@@ -19,6 +19,9 @@
 						<li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="About">Om</a></li>
 						<li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Shop">Shop</a></li>
 						<li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Gallery">Gallery</a></li>
+					</ul>
+					<ul class="navbar-nav-auto">
+						<li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Regidter</a></li>
 						@if(User.Identity.IsAuthenticated){
 							<li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
 						}

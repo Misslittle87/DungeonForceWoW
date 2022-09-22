@@ -29,7 +29,7 @@ namespace DungeonForceWoW
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<ExempelSeeder>();
-                seeder.SeedAsync().Wait();
+                seeder.SeedAsync();
             }
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>

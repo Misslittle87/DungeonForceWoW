@@ -9,7 +9,7 @@ namespace DungeonForceWoW
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentity<StoreUser, IdentityRole>(cfg =>
+            services.AddIdentity<IdentityUser, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
             })

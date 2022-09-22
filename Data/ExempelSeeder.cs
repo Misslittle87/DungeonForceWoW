@@ -9,9 +9,9 @@ namespace DungeonForceWoW.Data
     {
         private readonly DungeonForceContext context;
         private readonly IWebHostEnvironment hosting;
-        private readonly UserManager<StoreUser> userManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public ExempelSeeder(DungeonForceContext context, IWebHostEnvironment hosting, UserManager<StoreUser> userManager)
+        public ExempelSeeder(DungeonForceContext context, IWebHostEnvironment hosting, UserManager<IdentityUser> userManager)
         {
             this.context = context;
             this.hosting = hosting;
@@ -20,14 +20,14 @@ namespace DungeonForceWoW.Data
         public async Task SeedAsync()
         {
             context.Database.EnsureCreated();
-            StoreUser user = await userManager.FindByEmailAsync("sofia_hansson_87@hotmail.com");
+            IdentityUser user = await userManager.FindByEmailAsync("sofia_hansson_87@hotmail.com");
 
             if (user == null)
             {
-                user = new StoreUser()
+                user = new IdentityUser()
                 {
-                    FirstName = "Sofia",
-                    LastName = "Hansson",
+                    ////FirstName = "Sofia",
+                    ////LastName = "Hansson",
                     Email = "sofia_hansson_87@hotmail.com",
                     UserName = "sofia_hansson_87@hotmail.com"
                 };
